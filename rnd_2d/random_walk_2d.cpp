@@ -93,14 +93,21 @@ int main()
 
    //Se imprime cada punto del camino realzado y su respectivo calor r^2
    
-   for(int i=0;i<pasos;++i){
-     for(int j=i;j<Steps*N;j+=Steps){
-       printf(" %4d %4d ",X1[j],X2[j]);
-       Avg[i]+=X1[j]*X1[j]+X2[j]*X2[j];
+    for(int i=0;i<pasos;++i)
+     {
+       for(int j=i;j<Steps*N;j+=Steps)
+	 {
+	   Avg[i]+=X1[j]*X1[j]+X2[j]*X2[j];
+	 }
+       printf(" %5d %7.3f ",contador,Avg[i]*1.0/N);
+       contador++;
+
+       for(int j=i;j<Steps*N;j+=Steps)
+	 printf(" %4d %4d ",X1[j],X2[j]);
+
+       printf("\n");
+	 
      }
-     printf("%7.3f %5d \n",Avg[i]*1.0/N,contador);
-     contador++;
- }
 // std::cout << '\n';
 
      // delete [] X;

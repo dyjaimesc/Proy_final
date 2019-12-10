@@ -25,9 +25,9 @@ set grid
 #set logscale x 2
 #set key left top box
 #unset key
-splot [][] "$name.txt" u 1:2:3 title "$Name_walk 1" w lp ps $VAR lt rgb "red" pointtype 7, \
-     	 # "$name.txt" u 4:5:6  title "$Name_walk 2" w lp ps $VAR lt rgb "blue" pointtype 7, \
-	 # "$name.txt" u 7:8:9  title "$Name_walk 3" w lp ps $VAR lt rgb "green" pointtype 7
+splot [][] "$name.txt" u 3:4:5 title "$Name_walk 1" w lp ps $VAR lt rgb "red" pointtype 7, \
+     	  "$name.txt" u 6:7:8  title "$Name_walk 2" w lp ps $VAR lt rgb "blue" pointtype 7, \
+	  "$name.txt" u 9:10:11  title "$Name_walk 3" w lp ps $VAR lt rgb "green" pointtype 7
 
 set term pdf
 set output "Mean_Rand_walk_vs_steps.pdf"
@@ -42,11 +42,11 @@ set grid
 #set logscale y
 set key right bottom box
 g(x)=x
-plot [][] "$name.txt" u $col:$col-1 w lp ps $VAR lt rgb "red" pointtype 7, g(x) w lp ps $VAR lt rgb "blue" pointtype 7
+plot [][] "$name.txt" u 1:2 w lp ps $VAR lt rgb "red" pointtype 7, g(x) w lp ps $VAR lt rgb "blue" pointtype 7
 
 
 #f(x) = m*x + b
-#fit f(x) "$name.txt" using (log(\$3002)):(log(\$3001)) via m,b
+#fit f(x) "$name.txt" using (log(\$1)):(log(\$2)) via m,b
 
 set term pdf
 set output "ajuste.pdf
@@ -56,12 +56,12 @@ set fit quiet #Evita imprimir ajuste en consola
 f(x) = a*x + b
 a=1
 b=1
-fit f(x) "$name.txt" using (log(\$3002)):(log(\$3001)) via a,b
+fit f(x) "$name.txt" using (log(\$1)):(log(\$2)) via a,b
 #set fit logfile '/dev/null' #no crear un archivo fit.log
 print "error of a is:", a_err
 #set label "a=%6.2f", a, "+/- %6.2f", a_err
 save fit "datos_ajuste.txt
-plot "$name.txt" using (log(\$3002)):(log(\$3001)), f(x) title sprintf("y=m*x+b, m=%.3f; b=%.3f", a, b)
+plot "$name.txt" using (log(\$1)):(log(\$2)), f(x) title sprintf("y=m*x+b, m=%.3f; b=%.3f", a, b)
 
 
 EOF

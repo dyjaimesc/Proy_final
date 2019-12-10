@@ -24,9 +24,9 @@ set grid
 #set logscale x 2
 #set key left top box
 #unset key
-splot [][] "$name.txt" u 1:2:3 title "$Name_walk 1" w lp ps $VAR lt rgb "red" pointtype 7, \
-     	  "$name.txt" u 4:5:6  title "$Name_walk 2" w lp ps $VAR lt rgb "blue" pointtype 7, \
-	  "$name.txt" u 7:8:9  title "$Name_walk 3" w lp ps $VAR lt rgb "green" pointtype 7
+splot [][] "$name.txt" u 3:4:5 title "$Name_walk 1" w lp ps $VAR lt rgb "red" pointtype 7, \
+     	  "$name.txt" u 6:7:8  title "$Name_walk 2" w lp ps $VAR lt rgb "blue" pointtype 7, \
+	  "$name.txt" u 9:10:11  title "$Name_walk 3" w lp ps $VAR lt rgb "green" pointtype 7
 
 set term pdf
 set output "Mean_Rand_walk_vs_steps.pdf"
@@ -39,7 +39,7 @@ set grid
 #set mytics 2
 #set logscale x 2
 set key right bottom box
-plot [][] "$name.txt" u 30002:30001 w lp ps $VAR lt rgb "red" pointtype 7
+plot [][] "$name.txt" u 1:2 w lp ps $VAR lt rgb "red" pointtype 7
 replot x w lp ps $VAR lt rgb "blue" pointtype 7
 
 

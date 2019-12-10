@@ -10,7 +10,7 @@
 int main()
 {
   //Se crean variables que  dan la cantidad de caminos que se realzan (N) y la cantidad de pasos por camino (Steps)
-  int N=1000;//Repeticiones
+  int N=5000;//Repeticiones
   int Steps=100;
 
   int pasos=Steps;//Variable utilizada para  parar el programa si el camino aleatorio se encuentra con un punto sin salida posible.
@@ -20,17 +20,17 @@ int main()
   double random=0.0;
   int x1=0,x2=0,x3=0;//Variables temporales donde guardo los cambios de las respectivas coordenads
 
-    int part[max_vec];//sectores que se divide la unidad
-  int X1[Steps*N];
-    int X2[Steps*N];
-    int X3[Steps*N];
-    int Avg[Steps]; //Valor promedio de la posicion
+  // int part[max_vec];//sectores que se divide la unidad
+  //int X1[Steps*N];
+  //  int X2[Steps*N];
+  //  int X3[Steps*N];
+  //  int Avg[Steps]; //Valor promedio de la posicion
 
-    //int *part= new int[max_vec];//sectores que se divide la unidad
-    // int *X1= new int[Steps*N];
-    //int *X2= new int[Steps*N];
-    //int *X3= new int[Steps*N];
-    //int *Avg= new int[Steps]; //Valor promedio de la posicion
+  int *part= new int[max_vec];//sectores que se divide la unidad
+  int *X1= new int[Steps*N];
+  int *X2= new int[Steps*N];
+  int *X3= new int[Steps*N];
+  int *Avg= new int[Steps]; //Valor promedio de la posicion
   
   ///////////////////////////////////////////////////////////////////////////////////////
   //Inicializo los arreglos que se van a utilizar
@@ -171,20 +171,28 @@ int main()
 
    //Se imprime cada punto del camino realzado y su respectivo calor r^2
    
-   for(int i=0;i<pasos;++i){
-     for(int j=i;j<Steps*N;j+=Steps){
-       printf(" %4d %4d %4d ",X1[j],X2[j],X3[j]);
-       Avg[i]+=X1[j]*X1[j]+X2[j]*X2[j]+X3[j]*X3[j];
-     }
-     printf("%7.3f %5d \n",Avg[i]*1.0/N,contador);
-     contador++;
- }
+   for(int i=0;i<pasos;++i)
+     {
+       for(int j=i;j<Steps*N;j+=Steps)
+	 {
+	   // printf(" %4d %4d %4d ",X1[j],X2[j],X3[j]);
+	   Avg[i]+=X1[j]*X1[j]+X2[j]*X2[j]+X3[j]*X3[j];
+	 }
+       printf(" %5d %7.3f ",contador,Avg[i]*1.0/N);
+       contador++;
 
-   //  delete [] part;//sectores que se divide la unidad
-   // delete [] X1;
-   // delete [] X2;
-   //delete [] X3;
-   //delete [] Avg; //Valor promedio de la posicion
+       for(int j=i;j<Steps*N;j+=Steps)
+	 printf(" %4d %4d %4d ",X1[j],X2[j],X3[j]);
+
+       printf("\n");
+	 
+     }
+
+   delete [] part;//sectores que se divide la unidad
+   delete [] X1;
+   delete [] X2;
+   delete [] X3;
+   delete [] Avg; //Valor promedio de la posicion
  
    
  return 0;
