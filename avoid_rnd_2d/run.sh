@@ -42,7 +42,7 @@ set grid
 #set logscale y
 set key right bottom box
 g(x)=x
-plot [][] "$name.txt" u 1:2 w lp ps $VAR lt rgb "red" pointtype 7, g(x) w lp ps $VAR lt rgb "blue" pointtype 7
+plot [][] "$name.txt" u 1:2 w p ps 1 lt rgb "red" pointtype 7, g(x) w lp ps $VAR lt rgb "blue" pointtype 7
 
 
 #f(x) = m*x + b
