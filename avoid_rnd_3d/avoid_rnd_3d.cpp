@@ -10,7 +10,7 @@
 int main()
 {
   //Se crean variables que  dan la cantidad de caminos que se realzan (N) y la cantidad de pasos por camino (Steps)
-  int N=5000;//Repeticiones
+  int N=10000;//Repeticiones
   int Steps=100;
 
   int pasos=Steps;//Variable utilizada para  parar el programa si el camino aleatorio se encuentra con un punto sin salida posible.
