@@ -43,9 +43,9 @@ int main()
      
    
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    //  int seed=8;
+    //  int seed=4;
     //  std::mt19937 gen(seed);
-      std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
    std::uniform_real_distribution<> dis(0.0,  1.0);
 
    for(int i=0;i<N;++i)
@@ -98,7 +98,11 @@ int main()
 
 	       }//j=Steps;
 	     max_vec=dim*2;
-	     break;
+	     // X1[j+1+i*Steps]=X1[j+i*Steps];
+	     //X2[j+1+i*Steps]=X2[j+i*Steps];
+	     j=0;
+	     continue;
+	     //break;
 	   }
 	   
 	 //exit(-1);}//no hay mas espacios hacia donde moverse por lo tanto debo terminar el programa
@@ -137,7 +141,7 @@ int main()
 
  
 
-  for(int i=0;i<pasos;++i)
+  for(int i=0;i<Steps;++i)
      {
        for(int j=i;j<Steps*N;j+=Steps)
 	 {
