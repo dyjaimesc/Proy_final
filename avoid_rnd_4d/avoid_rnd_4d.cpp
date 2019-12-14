@@ -4,13 +4,15 @@
 #include <algorithm>
 #include <iostream>
 #include <cstdio>
+#include<fstream>
 
+int lectura();//Funcion que lee la dimension del bloque
 // double desplazamiento();
  
 int main()
 {
   //Se crean variables que  dan la cantidad de caminos que se realzan (N) y la cantidad de pasos por camino (Steps)
-  int N=2000;//Repeticiones
+  int N=200;//Repeticiones
   int Steps=50;
 
   int pasos=Steps;//Variable utilizada para  parar el programa si el camino aleatorio se encuentra con un punto sin salida posible.
@@ -50,10 +52,10 @@ int main()
    //////////////////////////////////////////////////////////////////////////////////////
    //Algoritmo que permite generar numeros aleatorios
    
-     std::random_device rd;  //Will be used to obtain a seed for the random number engine
-     // int seed=1;
-     // std::mt19937 gen(seed);
-      std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+   // std::random_device rd;  //Will be used to obtain a seed for the random number engine
+   int seed=lectura();
+      std::mt19937 gen(seed);
+      // std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
    std::uniform_real_distribution<> dis(0.0,  1.0);
 
    //////////////////////////////////////////////////////////////////////////////////////
@@ -148,4 +150,29 @@ int main()
  
    
  return 0;
+}
+
+int lectura(){
+  int x=0;//Variable para guardar  el numero del bloque que viene dado del un archivo de texto externo creado en el script
+  int Longitud_cadena=0;
+  char buffer[6];   //Creo una variable char para guardar renglon a renglon cada uno de los renglones de los datos
+  char temporal[6];
+  
+  std::ifstream archivo;
+  std::string texto;
+  archivo.open("entrada.dat",std::ios::in);
+  if(archivo.fail()){
+    printf("No se pudo abrir el archivo");
+  }
+
+  while(!archivo.eof()){//Mientras no sea el final del archivo
+    getline(archivo,texto,'\n');
+    Longitud_cadena=texto.length();
+    size_t length = texto.copy(buffer,Longitud_cadena,0);   //convierto el string en char, y guardo la longitud del char en length
+    buffer[length]='\0';    //despues de terminar los caracteres de mi char dejo vacia la siguiente casilla
+    length=texto.copy(temporal,Longitud_cadena,0);
+    x=std::atoi(temporal);
+  }
+  archivo.close();
+  return x;
 }

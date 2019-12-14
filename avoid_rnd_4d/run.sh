@@ -3,14 +3,19 @@ pwd
 name="avoid_rnd_4d"
 VAR=0.05
 Name_walk="Walk"
-col="3002"
 
-g++ -std=c++17 -Wall -g -fsanitize=address -fsanitize=leak -fsanitize=undefined  -O3 $name.cpp -o $name.x
-/usr/bin/time ./$name.x > $name.txt
+for i in {1..12}
+do
+    rm -r entrada.dat
+    echo $((i))>>entrada.dat # introduzco valor del bloque
+
+    g++ -std=c++17 -Wall -g -fsanitize=address -fsanitize=leak -fsanitize=undefined  -O3 $name.cpp -o $name.x
+    #/usr/bin/time ./$name.x > $name.txt
+    ./$name.x > $name.txt
 
 
 
-cat <<EOF> $name.gp
+    cat <<EOF> $name.gp
 
 
 
@@ -43,7 +48,7 @@ a=1
 b=1
 fit f(x) "$name.txt" using (log(\$1)):(log(\$2)) via a,b
 #set fit logfile '/dev/null' #no crear un archivo fit.log
-print "pendiente of a is:", a
+print "pendiente of a is: ", a
 #set label "a=%6.2f", a, "+/- %6.2f", a_err
 save fit "datos_ajuste.txt
 plot "$name.txt" using (log(\$1)):(log(\$2)), f(x) title sprintf("y=m*x+b, m=%.4f; b=%.4f", a, b)
@@ -53,6 +58,18 @@ EOF
 gnuplot $name.gp
 
 #okular Rand_walk_vs_steps.pdf &
-okular Mean_Rand_walk_vs_steps.pdf &
-okular ajuste.pdf &
+#okular Mean_Rand_walk_vs_steps.pdf &
+#okular ajuste.pdf &
+done
 
+#for i in {1..12}
+#do
+    # echo $((N))
+  #  rm -r entrada.dat
+ #   echo $((i))>>entrada.dat # introduzco valor del bloque
+   
+  #  N=$((i*2))
+  #  rm -r entrada.dat
+#done
+
+#kate entrada.dat &
