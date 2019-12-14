@@ -10,8 +10,8 @@
 int main()
 {
   //Se crean variables que  dan la cantidad de caminos que se realzan (N) y la cantidad de pasos por camino (Steps)
-  int N=10000;//Repeticiones
-  int Steps=100;
+  int N=1000;//Repeticiones
+  int Steps=40;
 
   int pasos=Steps;//Variable utilizada para  parar el programa si el camino aleatorio se encuentra con un punto sin salida posible.
   int dim=3;//Dimension del programa
@@ -49,91 +49,23 @@ int main()
    //////////////////////////////////////////////////////////////////////////////////////
    //Algoritmo que permite generar numeros aleatorios
    
-    std::random_device rd;  //Will be used to obtain a seed for the random number engine
-   // int seed=1;
-   //  std::mt19937 gen(seed);
-   std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+   //  std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    int seed=10;
+     std::mt19937 gen(seed);
+     //std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
    std::uniform_real_distribution<> dis(0.0,  1.0);
 
    //////////////////////////////////////////////////////////////////////////////////////
-   // Inicio funcion que calcula el camino aleatorio en tres dimensions
+   // Inicio funcion que calcula el camino aleatorio en tres dimensiones
    
    for(int i=0;i<N;++i)// bucle que realiza diferentes caminos
      {
        for(int j=0;j<Steps-1;++j)// Bucle que da cada paso aleatorio
 	 {
-	   for(int i=1;i<=max_vec;++i)
-	     part[i-1]=i*1.0;
+	   // for(int i=1;i<=max_vec;++i)
+	   //   part[i-1]=i*1.0;
 	    
 	   random=dis(gen); // Se genera numero aleatorio
-	   
-	   ///////////////////////////////////////////////////////////////////
-	   // Algoritmo que verifica puntos recorridos
-
-	   for(int k=0;k<j;k++)
-	     {
-	       if(X2[j+i*Steps]==X2[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])//Reviso si la posicion j-esima de X2 ya esta ocupada en otra posicion k-esima
-		 {
-		   if(X1[j+i*Steps]+1==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps]) //Reviso si la posicion siguiente a X1 de j corresponde a la poscion k-esima de X1 (con esto comparo las parejas (X1[j]+1,X2[j]) y la posicion ya ocupada (X1[k],X2[k]) )
-		     {
-		       part[0]=0.0;
-		       max_vec--;
-		     }
-		   if(X1[j+i*Steps]-1==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])
-		     {
-		       part[1]=0.0;
-		       max_vec--;
-		     }
-		 }
-
-	       if(X1[j+i*Steps]==X1[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])
-		 {
-		   if(X2[j+i*Steps]+1==X2[k+i*Steps] && X1[j+i*Steps]==X1[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])
-		     {
-		       part[2]=0.0;
-		       max_vec--;
-		     }
-		   if(X2[j+i*Steps]-1==X2[k+i*Steps] && X1[j+i*Steps]==X1[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])
-		     {
-		       part[3]=0.0;
-		       max_vec--;
-		     }
-		 }
-	       
-	       if(X1[j+i*Steps]==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps])
-		 {
-		   if(X3[j+i*Steps]+1==X3[k+i*Steps] && X1[j+i*Steps]==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps])
-		     {
-		       part[4]=0.0;
-		       max_vec--;
-		     }
-		   if(X3[j+i*Steps]-1==X3[k+i*Steps] && X1[j+i*Steps]==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps])
-		     {
-		       part[5]=0.0;
-		       max_vec--;
-		     }
-		 }
-	     }
-
-	   if(max_vec<1){
-	     if(j+1<pasos)
-	       {
-	     pasos=j+1;
-
-	       }//j=Steps;
-	     max_vec=dim*2;
-	     break;
-	   }
-	   
-	 //exit(-1);}//no hay mas espacios hacia donde moverse por lo tanto debo terminar el programa
-       double kk=0;
-       for(int k=0;k<dim*2;k++)
-	 {
-	   if(part[k]>0.0){
-	     kk+=1; part[k]=kk;
-	   }
-	 }
-
 
 
 
@@ -166,6 +98,19 @@ int main()
 	   x2=0;
 	   x3=0;
 	   max_vec=dim*2;
+
+	   ///////////////////////////////////////////////////////////////////
+	   // Algoritmo que verifica puntos recorridos
+
+	   for(int k=0;k<j;k++)
+	     {
+	       if(X1[j+i*Steps]==X1[k+i*Steps] && X2[j+i*Steps]==X2[k+i*Steps] && X3[j+i*Steps]==X3[k+i*Steps])//Reviso si la posicion j-esima de X2 ya esta ocupada en otra posicion k-esima
+		 {
+		   j=0;
+		   break;
+		 }
+	   
+	     }
 	 }
      }
 
