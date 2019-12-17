@@ -11,7 +11,7 @@ int main()
 {
   //Se crean variables que  dan la cantidad de caminos que se realzan (N) y la cantidad de pasos por camino (Steps)
   int N=10000;//Repeticiones
-  int Steps=500;
+  int Steps=100;
 
   int pasos=Steps;//Variable utilizada para  parar el programa si el camino aleatorio se encuentra con un punto sin salida posible.
   int dim=3;//Dimension del programa
@@ -19,12 +19,6 @@ int main()
   int max_vec=dim*2; //Cantidad maxima de vecinos que puede tener cada punto
   double random=0.0;
   int x1=0,x2=0,x3=0;//Variables temporales donde guardo los cambios de las respectivas coordenads
-
-  //  int part[max_vec];//sectores que se divide la unidad
-  //int X1[Steps*N];
-  //  int X2[Steps*N];
-  //  int X3[Steps*N];
-  //  int Avg[Steps]; //Valor promedio de la posicion
 
   int *part= new int[max_vec];//sectores que se divide la unidad
   int *X1= new int[Steps*N];
@@ -49,10 +43,10 @@ int main()
    //////////////////////////////////////////////////////////////////////////////////////
    //Creo algoritmo que permite generar numeros aleatorios
    
-   std::random_device rd;  //Will be used to obtain a seed for the random number engine
-   //  int seed=8;
-   //  std::mt19937 gen(seed);
-   std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+   //std::random_device rd;  //Will be used to obtain a seed for the random number engine
+   int seed=1;
+    std::mt19937 gen(seed);
+   //std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
    std::uniform_real_distribution<> dis(0.0,  1.0);
 
    //////////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +112,7 @@ int main()
    delete [] X1;
    delete [] X2;
    delete [] X3;
-   delete [] Avg; //Valor promedio de la posicion
+   delete [] Avg; 
  
    
  return 0;
