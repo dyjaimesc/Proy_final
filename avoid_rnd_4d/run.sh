@@ -23,7 +23,7 @@ cat <<EOF> $name.gp
 
 set term pdf
 set output "Mean_SAW_vs_steps_4d.pdf"
-set xlabel "Steps"
+set xlabel "Pasos"
 set ylabel "<r^2>"
 set grid
 set key right bottom box
@@ -36,7 +36,7 @@ plot [][] "$name.txt" u 1:2:3 title "Datos SAW 4d" w p ps 0.5 lt rgb "red" point
 
 set term pdf
 set output "ajuste_SAW_4d.pdf
-set xlabel "log(Steps)"
+set xlabel "log(Pasos)"
 set ylabel "log(<r^2>)"
 set key left top box
 set fit quiet #Evita imprimir ajuste en consola
@@ -48,7 +48,7 @@ fit f(x) "$name.txt" using (log(\$1)):(log(\$2)) via a,b
 set print "$slope.txt" append #append bandera para que me sobrescriba en el archivo ya existente
 print a #"$slope.txt" a
 save fit "datos_ajuste.txt"
-plot "$name.txt" using (log(\$1)):(log(\$2)):(log(\$3)) title "Datos" w p ps 0.5 lt rgb "red" pointtype 7 , f(x) title sprintf("Fit y=m*x+b, m=%.3f; b=%.3f", a, b)
+plot "$name.txt" using (log(\$1)):(log(\$2)):(log(\$3)) title "Datos" w p ps 0.5 lt rgb "red" pointtype 7 , f(x) title sprintf("Ajuste: y=m*x+b, con m=%.3f; b=%.3f", a, b)
 
 EOF
 gnuplot $name.gp

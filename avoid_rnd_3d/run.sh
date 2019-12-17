@@ -3,7 +3,7 @@ pwd
 name="avoid_rnd_3d"
 slope="Pendiente"
 VAR=0.05
-Name_walk="Walk"
+Name_walk="Camino"
 rm $slope.txt
 
 for i in {1..15}
@@ -20,6 +20,7 @@ set term pdf
 set output "Saw_vs_steps_3d.pdf"
 set xlabel "x"
 set ylabel "y"
+set zlabel "z"
 set grid
 splot [][] "$name.txt" u 4:5:6 title "$Name_walk 1" w lp ps $VAR lt rgb "red" pointtype 7, \
      	  "$name.txt" u 7:8:9  title "$Name_walk 2" w lp ps $VAR lt rgb "blue" pointtype 7, \
@@ -27,7 +28,7 @@ splot [][] "$name.txt" u 4:5:6 title "$Name_walk 1" w lp ps $VAR lt rgb "red" po
 
 set term pdf
 set output "Mean_SAW_vs_steps_3d.pdf"
-set xlabel "Steps"
+set xlabel "Pasos"
 set ylabel "<r^2>"
 set grid
 
@@ -38,7 +39,7 @@ plot [][] "$name.txt" u 1:2:3 title "Datos SAW" w p ps 0.5 lt rgb "red" pointtyp
 
 set term pdf
 set output "ajuste_SAW_3d.pdf
-set xlabel "log(Steps)"
+set xlabel "log(Pasos)"
 set ylabel "log(<r^2>)"
 set key left top box
 set fit quiet #Evita imprimir ajuste en consola
@@ -49,7 +50,7 @@ fit f(x) "$name.txt" using (log(\$1)):(log(\$2)) via a,b
 set print "$slope.txt" append
 print a #"$slope.txt" a
 save fit "datos_ajuste.txt
-plot "$name.txt" using (log(\$1)):(log(\$2)):(log(\$3)) title "Datos" w p ps 0.5 lt rgb "red" pointtype 7 , f(x) title sprintf("Fit y=m*x+b, m=%.3f; b=%.3f", a, b)# w lp ps 0.1 lt rgb "green"
+plot "$name.txt" using (log(\$1)):(log(\$2)):(log(\$3)) title "Datos" w p ps 0.5 lt rgb "red" pointtype 7 , f(x) title sprintf("Ajuste: y=m*x+b,con m=%.3f; b=%.3f", a, b)# w lp ps 0.1 lt rgb "green"
 
 
 EOF
