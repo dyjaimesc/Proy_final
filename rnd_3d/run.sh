@@ -32,8 +32,8 @@ splot [][] "$name.txt" u 3:4:5 title "$Name_walk 1" w lp ps $VAR lt rgb "red" po
 
 set term pdf
 set output "ajuste_rw_3d.pdf
-set xlabel "log(Steps)"
-set ylabel "log(<r^2>)"
+set xlabel "Pasos"
+set ylabel "<r^2>"
 set key right bottom box
 set fit quiet #Evita imprimir ajuste en consola
 f(x) = a*x + b
