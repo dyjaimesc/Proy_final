@@ -13,8 +13,8 @@
 
 //Se crean variables que  dan la cantidad de caminos que se realzan (N_walk) y la cantidad de pasos por camino (Steps)
 
-const int N_walk=200;//Numero de Caminos distintos e independientes
-const int Steps=50;//Pasos por camino
+const int N_walk=500;//Numero de Caminos distintos e independientes
+const int Steps=40;//Pasos por camino
 const int dim=4;//Dimension del programa (4)
 int max_vec=dim*2; //Cantidad maxima de vecinos que puede tener cada punto
 
